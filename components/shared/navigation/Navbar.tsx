@@ -2,15 +2,20 @@ import Link from "next/link"
 import { Button } from "../../ui/button"
 import Image from "next/image"
 import { Plus } from "lucide-react"
+import { auth } from "@/auth"
+import { NavAvatar, SmNavbarSheet } from "./NavbarSections"
 
 export default async function Navbar() {
+
+    const session = await auth()
+    console.log(session)
 
     return (
         <nav className="sticky top-0 z-50 w-full bg-background shadow-sm shadow-accent">
             <div className="flex items-center justify-between h-16 my-container">
                 <div className="flex-shrink-0 flex items-center gap-4">
                     <div className="md:hidden flex">
-                        {/* <SmNavbarSheet /> */}
+                        <SmNavbarSheet />
                     </div>
                     <Link href="/" className="">
                         <div className="w-max flex items-center gap-2">
@@ -29,8 +34,8 @@ export default async function Navbar() {
                             </Link>
                         </Button>
                     </div>
-                    {/* <ModeToggle />
-                    <NavAvatar session={session} /> */}
+                    {/* <ModeToggle /> */}
+                    <NavAvatar session={session} />
                 </div>
             </div>
         </nav >

@@ -1,4 +1,18 @@
 import mongoose from "mongoose";
+import { Document } from "mongoose";
+
+export interface IUser extends Document {
+    name: string;
+    email: string;
+    password?: string;
+    avatar?: string;
+    provider: 'credentials' | 'google' | 'facebook' | 'github';
+    verified?: boolean;
+    verificationToken?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
 
 // Define the user schema
 const userSchema = new mongoose.Schema(
