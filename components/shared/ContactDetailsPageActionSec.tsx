@@ -89,7 +89,7 @@ const ContactDetailsPageActionSec = ({ contact, session }: { contact: IContact, 
                 contact={contact}
                 open={showUpdateModal}
                 setOpen={setShowUpdateModal}
-                userId={session?.user?.id}
+                userId={session?.user?.id as string}
             />
         </div>
     )
