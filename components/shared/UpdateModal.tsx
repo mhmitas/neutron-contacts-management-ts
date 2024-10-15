@@ -5,8 +5,16 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import ContactForm from './ContactForm'
 import { Button } from '../ui/button'
 import { X } from 'lucide-react'
+import { IContact } from '@/lib/database/models/contact.model'
 
-const UpdateModal = ({ open, setOpen, userId, contact }) => {
+type UpdateModalProps = {
+    open: boolean,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    userId: string,
+    contact: IContact,
+}
+
+const UpdateModal = ({ open, setOpen, userId, contact }: UpdateModalProps) => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="max-w-2xl w-[95%] h-[90vh] overflow-y-auto p-4 sm:p-6 md:p-8" onPointerDownOutside={e => e.preventDefault()}>
