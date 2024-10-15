@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Plus } from "lucide-react"
 import { auth } from "@/auth"
 import { LgNavItems, NavAvatar, SmNavbarSheet } from "./NavbarSections"
+import { ModeToggle } from "../ModeToggle"
 
 export default async function Navbar() {
 
@@ -33,7 +34,7 @@ export default async function Navbar() {
                             </Link>
                         </Button>
                     </div>
-                    {/* <ModeToggle /> */}
+                    <ModeToggle />
                     <NavAvatar session={session} />
                 </div>
             </div>

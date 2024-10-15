@@ -27,9 +27,9 @@ const SignUpPage = () => {
 
     async function onSubmit(values: z.infer<typeof SignUpFormSchema>) {
         try {
-            const { error } = await createUser(values)
-            if (error) {
-                toast.error(error)
+            const res = await createUser(values)
+            if (res?.error) {
+                toast.error(res?.error)
             }
         } catch (error: any) {
             console.log(error)
