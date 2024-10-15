@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import Image from 'next/image';
 import { signOut } from "next-auth/react"
-import { Session } from 'inspector/promises';
+import { Session } from 'next-auth';
 
 const navItems = [
     { name: "Contacts", href: "/", Icon: FaUsers },
@@ -90,29 +90,33 @@ export const LgNavItems = () => {
 }
 
 
-export const NavAvatar = ({ session }: { session: Session }) => {
+export const NavAvatar = ({ session }: { session: Session | null }) => {
     return (
         <>
             {session ?
                 <DropdownMenu>
                     <DropdownMenuTrigger className='rounded-full'>
                         <Avatar>
-                            <AvatarImage src={session?.user?.image} />
+                            <AvatarImage src={session?.user?.image || ""} />
                             <AvatarFallback className="bg-gradient-to-b from-cyan-500 to-violet-600 text-white">{session?.user?.name?.slice(0, 2)}</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="bottom" align="end" className="rounded-xl border-none dark:shadow-muted">
                         <div className='p-4 min-w-64 w-max'>
                             <figure className='flex items-center justify-center size-24 rounded-full m-auto mb-2 bg-gradient-to-b from-cyan-500 to-violet-600 text-white'>
-                                <Image width={100} height={100} className='w-full rounded-full border-secondary' src={session?.user?.image} alt="user profile image" />
+                                {session?.user?.image ?
+                                    <Image width={100} height={100} className='w-full rounded-full border-secondary' src={session?.user?.image || "/default-avatar.png"} alt="user profile image" />
+                                    :
+                                    <p className='text-3xl'>{session?.user?.name?.slice(0, 2)}</p>
+                                }
                             </figure>
                             <div className=''>
-                                <h3 className='text-lg font-medium text-center'>MH. Mitas</h3>
-                                <p className='text-sm text-center'>mahfuzulmitas@gmail.com</p>
+                                <h3 className='text-lg font-medium text-center'>{session?.user?.name}</h3>
+                                <p className='text-sm text-center'>{session?.user?.email}</p>
                             </div>
                         </div>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="py-2 px-4 space-x-2" onClick={signOut}>
+                        <DropdownMenuItem className="py-2 px-4 space-x-2" onClick={() => signOut()}>
                             <LogOut className='size-5' />
                             <span>Logout</span>
                         </DropdownMenuItem>

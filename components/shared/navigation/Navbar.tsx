@@ -3,12 +3,11 @@ import { Button } from "../../ui/button"
 import Image from "next/image"
 import { Plus } from "lucide-react"
 import { auth } from "@/auth"
-import { NavAvatar, SmNavbarSheet } from "./NavbarSections"
+import { LgNavItems, NavAvatar, SmNavbarSheet } from "./NavbarSections"
 
 export default async function Navbar() {
 
-    const session = await auth()
-    console.log(session)
+    const session = await auth();
 
     return (
         <nav className="sticky top-0 z-50 w-full bg-background shadow-sm shadow-accent">
@@ -26,7 +25,7 @@ export default async function Navbar() {
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="hidden md:flex items-center gap-4">
-                        {/* <LgNavItems /> */}
+                        <LgNavItems />
                         <Button asChild variant="secondary" className="rounded-full space-x-2">
                             <Link href="/contacts/create">
                                 <Plus />
